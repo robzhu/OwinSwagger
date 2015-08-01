@@ -3,29 +3,15 @@ using System.Web.Http.Description;
 
 namespace OwinSwagger
 {
-    /// <summary>
-    /// Resource representing a book.
-    /// </summary>
-    public class Book
-    {
-        /// <summary>
-        /// The self-link
-        /// </summary>
-        public string Href { get; set; }
-
-        /// <summary>
-        /// The name of the author
-        /// </summary>
-        public string Author { get; set; }
-
-        /// <summary>
-        /// The title of the book
-        /// </summary>
-        public string Title { get; set; }
-    }
-
     public class BookController : ApiController
     {
+        ILibrary _library;
+
+        public BookController( ILibrary library )
+        {
+            _library = library;
+        }
+
         /// <summary>
         /// Retrieves a book with the specified Id.
         /// </summary>
@@ -35,12 +21,8 @@ namespace OwinSwagger
         {
             //a real controller would need to take the id and look up the book in the database
             //let's hack it below to always return a single book
-            var book = new Book
-            {
-                Author = "Stephen King",
-                Title = "Hearts in Atlantis",
-                Href = Request.RequestUri.ToString(),
-            };
+            var book = _library.GetBook();
+            book.Href = Request.RequestUri.ToString();
             return Ok( book );
         }
     }

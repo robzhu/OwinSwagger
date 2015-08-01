@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.IO;
 using Microsoft.Owin.Hosting;
 
 namespace OwinSwagger
@@ -15,7 +14,7 @@ namespace OwinSwagger
             {
                 Console.WriteLine( "Service started at {0}", fullUrl );
                 Console.WriteLine( "Press ENTER to stop." );
-                //LaunchDocumentation( fullUrl );
+                LaunchDocumentation( fullUrl );
                 Console.ReadLine();
             }
         }
