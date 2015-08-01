@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Net.Http.Formatting;
 using System.Web.Http;
 using Newtonsoft.Json;
@@ -33,10 +34,11 @@ namespace OwinSwagger
             config.Routes.MapHttpRoute( "api", "{controller}/{id}", defaults: new { id = RouteParameter.Optional } );
             config.MapHttpAttributeRoutes();
 
+            var execPath = Path.GetDirectoryName( System.Reflection.Assembly.GetExecutingAssembly().Location );
             //Tell swagger to generate documentation based on the XML doc file output from msbuild
             config.EnableSwagger( c =>
             {
-                c.IncludeXmlComments( "docs.xml" );
+                c.IncludeXmlComments( execPath + "\\docs.xml" );
                 c.SingleApiVersion( "1.0", "Owin Swashbuckle Demo" );
             } ).EnableSwaggerUi();
 
