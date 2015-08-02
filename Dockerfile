@@ -9,4 +9,4 @@ WORKDIR /usr/owinswagger
 RUN nuget restore
 RUN xbuild
 
-CMD [ "mono", "/OwinSwagger/bin/Debug/OwinSwagger.exe" ]
+CMD [ "mono", "OwinSwagger/bin/Debug/OwinSwagger.exe" ]
